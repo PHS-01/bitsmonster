@@ -1,5 +1,5 @@
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v16-appRouter";
-import { CssBaseline, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import ThemeRegistry from "@/components/ThemeRegistry";
 
 export const metadata = {
   title: "BitsMonster",
@@ -10,12 +10,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-BR">
       <body>
-        <AppRouterCacheProvider>
-          <CssBaseline />
+        <ThemeRegistry>
           <Container maxWidth="lg" sx={{ py: 4 }}>
             {children}
           </Container>
-        </AppRouterCacheProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );
