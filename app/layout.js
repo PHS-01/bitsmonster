@@ -1,5 +1,6 @@
 import { Container } from "@mui/material";
 import ThemeRegistry from "@/components/ThemeRegistry";
+import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "BitsMonster",
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="pt-BR">
       <body>
         <ThemeRegistry>
+          <Navbar />
           <Container maxWidth="lg" sx={{ py: 4 }}>
             {children}
           </Container>
