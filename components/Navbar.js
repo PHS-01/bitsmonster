@@ -10,7 +10,6 @@ import ThemeSelector from "@/components/ThemeSelector";
 const NAV_ITEMS = [
   { label: "Home", href: "/" },
   { label: "Monsters", href: "/monsters" },
-  { label: "Teams", href: "/teams" },
 ];
 
 export default function Navbar() {
