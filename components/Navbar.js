@@ -1,18 +1,60 @@
 "use client";
 
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { AppBar, Toolbar, Box, Typography } from "@mui/material";
 import SmartToyIcon from "@mui/icons-material/SmartToy";
 import NavLink from "@/components/NavLink";
 import StatusIndicator from "@/components/StatusIndicator";
 import ThemeSelector from "@/components/ThemeSelector";
+import { createClient } from "@/lib/supabase/client";
 
 const NAV_ITEMS = [
-  { label: "Home", href: "/" },
-  { label: "Monsters", href: "/monsters" },
+  { label: "Início", href: "/" },
+  { label: "Monstros", href: "/monsters" },
 ];
 
+const STATUS_CONFIG = {
+  checking: {
+    color: "warning",
+    label: "API e Banco: Verificando...",
+    pulse: true,
+  },
+  online: {
+    color: "success",
+    label: "API e Banco: Online",
+    pulse: true,
+  },
+  offline: {
+    color: "error",
+    label: "API e Banco: Offline (clique para testar novamente)",
+    pulse: false,
+  },
+};
+
 export default function Navbar() {
+  const [dbStatus, setDbStatus] = useState("checking");
+
+  const checkConnection = useCallback(async () => {
+    setDbStatus("checking");
+    try {
+      const supabase = createClient();
+      const { error } = await supabase
+        .from("monsters")
+        .select("id", { count: "exact", head: true });
+
+      setDbStatus(error ? "offline" : "online");
+    } catch {
+      setDbStatus("offline");
+    }
+  }, []);
+
+  useEffect(() => {
+    checkConnection();
+  }, [checkConnection]);
+
+  const currentStatus = STATUS_CONFIG[dbStatus];
+
   return (
     <AppBar
       position="sticky"
@@ -89,7 +131,16 @@ export default function Navbar() {
         </Box>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
-          <StatusIndicator color="info" label="API & Database: Offline" pulse />
+          <Box
+            onClick={checkConnection}
+            sx={{ display: "inline-flex", cursor: "pointer" }}
+          >
+            <StatusIndicator
+              color={currentStatus.color}
+              label={currentStatus.label}
+              pulse={currentStatus.pulse}
+            />
+          </Box>
           <ThemeSelector />
         </Box>
       </Toolbar>
