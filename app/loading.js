@@ -14,7 +14,7 @@ export default function Loading() {
     >
       <CircularProgress color="primary" size={76} thickness={4.5} />
       <Typography variant="h5" color="text.secondary" fontWeight={700}>
-        Loading...
+        Carregando...
       </Typography>
     </Box>
   );

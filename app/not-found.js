@@ -37,12 +37,7 @@ export default function NotFound() {
         </Typography>
 
         <Typography variant="h5" fontWeight="bold">
-          Page Not Found
-        </Typography>
-
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 1 }}>
-          The arena or monster you are looking for does not exist or has been
-          moved.
+          Página Não Encontrada
         </Typography>
 
         <Button
@@ -52,7 +47,7 @@ export default function NotFound() {
           color="primary"
           size="large"
         >
-          Back to Arena
+          Voltar para o Início
         </Button>
       </Paper>
     </Box>
