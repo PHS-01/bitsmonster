@@ -24,6 +24,7 @@ const AnimatedIconButton = forwardRef(function AnimatedIconButton(
       sx={{
         ...(bordered && {
           border: "1px solid",
+          borderRadius: 1.5,
           borderColor: "divider",
         }),
         transition:
